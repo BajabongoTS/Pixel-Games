@@ -1,0 +1,41 @@
+# Pliki kompilacji C++
+*.obj
+*.o
+*.exe
+*.dll
+*.lib
+*.so
+*.a
+*.out
+
+# Pliki tymczasowe
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# Katalogi build
+/build/
+/bin/
+/debug/
+/release/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/install_manifest.txt
+/compile_commands.json
+
+# Pliki generowane przez Visual Studio
+.vs/
+*.vcxproj*
+*.sln
+*.user
+*.ncb
+*.suo
+*.opensdf
+*.sdf
+*.ipch
+
+# Pliki środowiskowe
+.env
