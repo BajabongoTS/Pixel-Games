@@ -29,7 +29,6 @@
 # Pliki generowane przez Visual Studio
 .vs/
 *.vcxproj*
-*.sln
 *.user
 *.ncb
 *.suo
