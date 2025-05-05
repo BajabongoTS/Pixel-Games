@@ -1,40 +1,42 @@
-# Pliki kompilacji C++
-*.obj
+# Pliki wynikowe kompilacji
 *.o
-*.exe
-*.dll
-*.lib
+*.obj
 *.so
-*.a
+*.dll
+*.exe
 *.out
+*.a
+*.lib
 
-# Pliki tymczasowe
-*.log
+# Pliki zależności i tymczasowe
+*.d
+*.dSYM/
 *.tmp
-*.temp
+*.log
+
+# Pliki edytorów
 *.swp
 *~
+.vscode/
+.idea/
+*.code-workspace
+
+# Pliki CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
 
 # Katalogi build
-/build/
-/bin/
-/debug/
-/release/
-/CMakeFiles/
-/CMakeCache.txt
-/Makefile
-/install_manifest.txt
-/compile_commands.json
+build/
+Build/
+out/
+bin/
+debug/
+release/
 
-# Pliki generowane przez Visual Studio
-.vs/
-*.vcxproj*
-*.user
-*.ncb
-*.suo
-*.opensdf
-*.sdf
-*.ipch
-
-# Pliki środowiskowe
-.env
+# Pliki testowe i inne artefakty
+test-results/
+*.gcno
+*.gcda
+*.gcov
