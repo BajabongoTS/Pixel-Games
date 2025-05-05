@@ -18,6 +18,7 @@ int main() {
 
         // Input
         input();
+
         cin >> n;
 
         if (n == "Quit") {

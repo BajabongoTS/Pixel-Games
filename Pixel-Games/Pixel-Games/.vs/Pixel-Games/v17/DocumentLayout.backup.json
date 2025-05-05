@@ -1,12 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\KonradKlautzsch\\Desktop\\Pixel-Games\\Pixel-Games\\Pixel-Games\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\konra\\Desktop\\Pixel-Games\\Pixel-Games\\Pixel-Games\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{286FBB5A-9B47-4C12-9211-8171004A94EC}|Pixel-Games\\Pixel-Games.vcxproj|C:\\Users\\konra\\Desktop\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{286FBB5A-9B47-4C12-9211-8171004A94EC}|Pixel-Games\\Pixel-Games.vcxproj|solutionrelative:Pixel-Games\\Pixel-Games.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Pixel-Games.cpp",
+              "DocumentMoniker": "C:\\Users\\konra\\Desktop\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games.cpp",
+              "RelativeDocumentMoniker": "Pixel-Games\\Pixel-Games.cpp",
+              "ToolTip": "C:\\Users\\konra\\Desktop\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games\\Pixel-Games.cpp",
+              "RelativeToolTip": "Pixel-Games\\Pixel-Games.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-05T22:28:11.173Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
