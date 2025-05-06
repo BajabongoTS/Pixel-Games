@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <stack>
+
+
 
 // Game
 void startGame(std::string& n);
@@ -19,4 +22,6 @@ void choseOption(std::string& n);
 void WeponChange(int id);
 
 void PasiweItemChange(int id);
+
+void choseOptionPlay(std::string& n);
 

@@ -2,8 +2,12 @@
 #include "text.h"
 #include <iostream>
 #include <cstdlib>
+#include <stack>
+
 
 using namespace std;
+
+string previousActivity = "";
 
 
 
@@ -11,18 +15,40 @@ using namespace std;
 
 void startGame(string& n) {
     if (n == "Play") {
-        system("cls");
+        previousActivity = "startGame";
 
+        system("cls");
         LevelView();
         system("cls");
-
         View_of_fight();
-
         View_fight_options();
 
+        cin >> n;
         gameLoop(n);
-        if (n == "Quit") {
-            exitMessage();
+        if (n == "Quit") exitMessage();
+    }
+}
+
+
+void choseOptionPlay(string& n) {
+    for (int i = 0; i < 3; ++i) cout << endl;
+
+    bool validOption = false;
+    while (!validOption) {
+        cout << "Chose Option to fight ";
+        cin >> n;
+
+        if (n == "NormalAttak") {
+            cout << "Normal";
+        }
+        else if (n == "SpecialAttak") {
+            cout << "Special!!";
+        }
+        else if (n == "back") {
+            goback(n);
+        }
+        else {
+            cout << "Option not found. Try again." << endl;
         }
     }
 }
@@ -31,27 +57,19 @@ void startGame(string& n) {
 
 void gotoInventory(string& n) {
     if (n == "Inventory") {
+        previousActivity = "gotoInventory";
+
         system("cls");
-
-        // Wiew inventory
         viewArmor();
-
-
         Options_of_Wepons_or_PasiweItem();
-
-
         choseOption(n);
-
-
         goback(n);
-
-
         gameLoop(n);
-        if (n == "Quit") {
-            exitMessage();
-        }
+        if (n == "Quit") exitMessage();
     }
 }
+
+
 
 void choseOption(string& n) {
     for (int i = 0; i < 3; ++i) cout << endl;
@@ -90,7 +108,12 @@ void choseOption(string& n) {
         else if (n == "back") {
             system("cls");
             title();
+
+            // Options
             options();
+
+            // Input
+            input();
             return;
         }
 
@@ -103,35 +126,46 @@ void choseOption(string& n) {
 // Dla obu 
 
 void goback(string& n) {
-    string c = "    ";
     while (n != "back") {
         cout << "######################" << endl;
-        cout << "Do you want do come back: ";
+        cout << "Do you want to go back? (back/no): ";
         cin >> n;
 
         if (n == "back") {
             system("cls");
 
-            viewArmor();
-
-            Options_of_Wepons_or_PasiweItem();
-
-            choseOption(n);
+            if (previousActivity == "gotoInventory") {
+                gotoInventory(n);
+                return;
+            }
+            else if (previousActivity == "startGame") {
+                startGame(n);
+                return;
+            }
+            else {
+                cout << "No previous activity recorded." << endl;
+                title();
+                options();
+                input();
+                return;
+            }
         }
-
         else if (n == "no") {
             break;
         }
-
     }
 }
 
+
 void gameLoop(string& n) {
+    if (n == "Quit") {
     while (n != "Quit") {
-        cout << "###########################" << endl;
-        cout << "Enter if you want to Quit: " << ends;
-        cin >> n;
+            cout << "###########################" << endl;
+            cout << "Enter if you want to Quit: " << ends;
+            cin >> n;
+        }
     }
+    
 }
 
 void exitMessage() {
@@ -162,11 +196,18 @@ void WeponChange(int id) {
                                                                           |                  /___\    
                                                                           |                           )";
 
+    string item4 = R"(               |                                                                                                                                              |         ///  /\                        |.
+               |                                                                                                                                              |        ///   \ \                       |.
+               |                                                                                                                                              |       ///     \ \_______^^^^^^|        |.
+               |                                                                                                                                              |        ///     \--------VVVVVV|        |.
+)";
+
     if (id == 1) {
         items = item1;
     }
     else if (id == 2) {
         items = item2;
+        ability = item4;
     }
     else if (id == 3) {
         items = item3;

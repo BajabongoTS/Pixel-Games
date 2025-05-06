@@ -8,6 +8,8 @@
 
 extern std::string items;
 extern std::string pasiws;
+extern std::string ability;
+
 
 extern int hp;
 extern int mana;
