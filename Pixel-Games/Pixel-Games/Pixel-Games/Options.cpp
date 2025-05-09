@@ -208,7 +208,6 @@ void goback(string& n) {
     
 }
 
-
 void gameLoop(string& n) {
     if (n == "Quit") {
     while (n != "Quit") {
