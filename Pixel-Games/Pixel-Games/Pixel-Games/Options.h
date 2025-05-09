@@ -14,6 +14,7 @@ void exitMessage();
 
 void goback(std::string& n);
 
+
 // Invoentory
 void gotoInventory(std::string& n);
 

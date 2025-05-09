@@ -10,9 +10,12 @@ extern std::string items;
 extern std::string pasiws;
 extern std::string ability;
 
+typedef int Hp;
+typedef int Mana;
 
-extern int hp;
-extern int mana;
+
+extern Hp hp;
+extern Mana mana;
 
 void title();
 
