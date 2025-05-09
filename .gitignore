@@ -1,42 +1,44 @@
-# Pliki wynikowe kompilacji
-*.o
-*.obj
-*.so
-*.dll
-*.exe
-*.out
-*.a
-*.lib
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.VC.db
+*.VC.VC.opendb
 
-# Pliki zależności i tymczasowe
-*.d
-*.dSYM/
-*.tmp
+# Build directories
+x64/
+Debug/
+Release/
 *.log
 
-# Pliki edytorów
-*.swp
-*~
-.vscode/
-.idea/
-*.code-workspace
+# Kompilowane pliki binarne
+*.obj
+*.pdb
+*.exe
+*.ilk
+*.ipch
+*.tlog
 
-# Pliki CMake
+# Pliki tymczasowe i cache
+*.tmp
+*.cache
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# C++
+*.o
+*.gch
+
+# CMake (jeśli używane)
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 Makefile
 
-# Katalogi build
-build/
-Build/
-out/
-bin/
-debug/
-release/
+# Systemowe
+.DS_Store
+Thumbs.db
 
-# Pliki testowe i inne artefakty
-test-results/
-*.gcno
-*.gcda
-*.gcov
+# Git
+*.orig
