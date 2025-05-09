@@ -226,8 +226,6 @@ void exitMessage() {
     cout << "##################" << endl;
 }
 
-
-
 void WeponChange(int id) {
 
     string item1 = R"(                                                                          |                           
