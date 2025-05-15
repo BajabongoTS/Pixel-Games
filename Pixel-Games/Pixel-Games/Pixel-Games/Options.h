@@ -4,7 +4,6 @@
 #include <stack>
 
 
-
 // Game
 void startGame(std::string& n);
 
@@ -14,6 +13,7 @@ void exitMessage();
 
 void goback(std::string& n);
 
+void UpLevelFight(int id);
 
 // Invoentory
 void gotoInventory(std::string& n);

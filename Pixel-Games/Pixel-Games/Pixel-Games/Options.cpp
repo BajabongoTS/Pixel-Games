@@ -1,4 +1,4 @@
-#include "Options.h"
+ï»¿#include "Options.h"
 #include "text.h"
 #include <iostream>
 #include <cstdlib>
@@ -6,8 +6,6 @@
 
 
 using namespace std;
-
-
 
 // Game
 
@@ -31,7 +29,7 @@ void startGame(string& n) {
 
 
 void choseOptionPlay(string& n) {
-    for (int i = 0; i < 3; ++i) cout << endl;
+    for (int i = 0; i < 1; ++i) cout << endl;
 
     bool validOption = false;
     while (!validOption) {
@@ -45,6 +43,9 @@ void choseOptionPlay(string& n) {
             cout << "Special!!" << endl;
         }
         else if (n == "back") {
+            hp = 100;
+            mana = 100;
+            EnemyHp = 200;
             break;
             system("cls");
             title();
@@ -56,67 +57,6 @@ void choseOptionPlay(string& n) {
         }
     }
 }
-
-// Inventory
-
-//void gotoInventory(string& n) {
-//    if (n == "Inventory") {
-//        system("cls");
-//
-//        viewArmor();
-//        Options_of_Wepons_or_PasiweItem();
-//        choseOption(n);
-//
-//        goback(n);
-//
-//        gameLoop(n);
-//        if (n == "Quit") exitMessage();
-//    }
-//}
-
-
-//void choseOption(string& n) {
-//    for (int i = 0; i < 3; ++i) cout << endl;
-//
-//    bool validOption = false;
-//    while (!validOption) {
-//        cout << "Choose an option (Wepons / PasiweItems / ChangeWepon / ChangePasiwe / back): ";
-//        cin >> n;
-//
-//        if (n == "Wepons") {
-//            system("cls");
-//            AsciiWeapons::viewWeapon(AsciiWeapons::sword);
-//            validOption = true;
-//        }
-//        else if (n == "PasiweItems") {
-//            system("cls");
-//            AsciiWeapons::viewPasiweItem(AsciiWeapons::shields);
-//            validOption = true;
-//        }
-//        else if (n == "ChangeWepon") {
-//            int id;
-//            cin >> id;
-//            WeponChange(id);
-//            system("cls");
-//            viewArmor();
-//            Options_of_Wepons_or_PasiweItem();
-//        }
-//        else if (n == "ChangePasiwe") {
-//            int id;
-//            cin >> id;
-//            PasiweItemChange(id);
-//            system("cls");
-//            viewArmor();
-//            Options_of_Wepons_or_PasiweItem();
-//        }
-//        else if (n == "back") {
-//            return;
-//        }
-//        else {
-//            cout << "Option not found. Try again." << endl;
-//        }
-//    }
-//}
 
 void gotoInventory(string& n) {
     if (n == "Inventory") {
@@ -131,7 +71,7 @@ void gotoInventory(string& n) {
                 break;
             }
             else if (n == "back") {
-                break; // wróæ do menu g³ównego
+                break;
             }
         }
     }
@@ -192,7 +132,7 @@ void choseOption(string& n) {
             cout << endl;
         }
         else if (n == "back") {
-            n = "back"; // wa¿ne ¿eby dalej wyjœæ z gotoInventory
+            n = "back";
             inInventory = false;
         }
         else {
@@ -252,7 +192,7 @@ void WeponChange(int id) {
 )";
 
 
-    string item5 = R"(               |                                                                                                                                              |                 _____                  |.
+    string item5 = R"(                     |                                                                                                                                                |                 _____                  |.
                |                                                                                                                                              |                /     \                 |.
                |                                                                                                                                              |               | () () |                |.
                |                                                                                                                                              |                \  ^  /                 |.
@@ -267,18 +207,22 @@ void WeponChange(int id) {
                |                                                                                                                                              |                  \\                    |.
 )";
 
+    
+
     if (id == 1) {
         items = item1;
         ability = item4;
+        PlayerDamage = PlayerDamage + 10;
     }
     else if (id == 2) {
         items = item2;
         ability = item5;
+        PlayerDamage = 20;
     }
     else if (id == 3) {
         items = item3;
         ability = item6;
-
+        PlayerDamage = 20;
     }
 }
 
@@ -302,11 +246,38 @@ void PasiweItemChange(int id) {
 |            \()|##/           |.   
 |             -----            |.)";
 
+    std::string enemydef1 = R"(               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |                                                                                                                                                                                       |.
+               |         _________________________________________________________                                                                                                                     |.
+               |        /                           ||                            \                                                                                                                    |.
+               |        |                           ||                            |                                                                                                                    |.
+               |        |                           ||                            |                                                                                                                    |.
+               |        |                           ||                            |                                                                                                                    |.
+    )";
+
+
     if (id == 1) {
         pasiws = item1;
         hp = 100;
         mana = 100;
         hp = hp + 30;
+        enemydef = enemydef1
     }
     else if (id == 2) {
         pasiws = item2;
@@ -322,3 +293,4 @@ void PasiweItemChange(int id) {
         mana = mana + 30;
     }
 }
+
