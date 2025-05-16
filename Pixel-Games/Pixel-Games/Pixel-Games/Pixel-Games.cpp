@@ -2,10 +2,14 @@
 #include "Options.h"
 #include <iostream>
 #include <string>
+#include <locale.h>
+
 
 using namespace std;
 
 int main() {
+    setlocale(LC_CTYPE, "");
+
     string n;
 
     while (true) {

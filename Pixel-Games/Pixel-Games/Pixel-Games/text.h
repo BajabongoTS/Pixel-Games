@@ -6,16 +6,21 @@
 #include <chrono>
 #include <atomic>
 
+
 extern std::string items;
 extern std::string pasiws;
 extern std::string ability;
-extern std::string enemydef;
 
+extern std::vector<std::string> enemydefshield;
+extern std::vector<std::string> wepdef;
+
+typedef int Shield;
 typedef int Hp;
 typedef int Mana;
 typedef int Damage;
 
 
+extern Shield shield;
 extern Hp hp;
 extern Mana mana;
 extern Damage PlayerDamage;

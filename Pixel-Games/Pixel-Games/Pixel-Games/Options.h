@@ -26,3 +26,6 @@ void PasiweItemChange(int id);
 
 void choseOptionPlay(std::string& n);
 
+// Enemies
+
+void Enemies(std::string& n);
