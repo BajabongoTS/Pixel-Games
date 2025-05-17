@@ -15,8 +15,12 @@ extern std::vector<std::string> enemydefshield;
 extern std::vector<std::string> wepdef;
 
 extern std::string enemy1;
+extern std::string enemy2;
+extern std::string enemy3;
+
 
 extern int gamecount;
+extern int AbilityCount;
 
 typedef int Shield;
 typedef int Hp;
@@ -27,16 +31,22 @@ typedef int Damage;
 extern Shield shield;
 extern Hp hp;
 extern Mana mana;
-
-extern Shield shield2;
-extern Hp hp2;
-extern Mana mana2;
-
 extern Damage PlayerDamage;
-extern Damage EndmyDamage;
+
+
+extern Damage EndmyDamage1;
+extern Hp EnemyHp1;
+
+extern Damage EndmyDamage2;
+extern Hp EnemyHp2;
+
+extern Damage EndmyDamage3;
+extern Hp EnemyHp3;
+
+
 extern Damage PlayerSpecialDamage;
 extern Mana ManaCost;
-extern Hp EnemyHp;
+
 
 void title();
 
@@ -71,12 +81,17 @@ namespace AsciiWeapons {
 
 
 // Play
+void Layer1Function(std::atomic<bool>& running);
 
-void viewLevel();
+void Layer1View();
 
-void LevelFunction(std::atomic<bool>& running);
+void Layer2Function(std::atomic<bool>& running);
 
-void LevelView();
+void Layer2View();
+
+void Layer3Function(std::atomic<bool>& running);
+
+void Layer3View();
 
 void View_of_fight();
 

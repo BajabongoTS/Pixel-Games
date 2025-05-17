@@ -48,6 +48,11 @@ int main() {
         }
 
         Enemies(n);
+
+        if (n == "Quit") {
+            exitMessage();
+            break;
+        }
     }
 
     return 0;

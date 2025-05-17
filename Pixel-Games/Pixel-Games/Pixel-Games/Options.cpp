@@ -7,7 +7,13 @@
 
 using namespace std;
 
+int AbilityCount = 0;
+
 int gamecount = 0;
+
+Hp hp2 = 1;
+Mana mana2 = 1;
+Shield shield2 = 1;
 
 // Game
 
@@ -15,7 +21,7 @@ void startGame(string& n) {
     if (n == "Play") {
         system("cls");
 
-        LevelView();
+        Layer1View();
         system("cls");
 
         View_of_fight();
@@ -29,12 +35,142 @@ void startGame(string& n) {
     }
 }
 
+
+vector<Enemy> enemies = {
+    {
+R"(                                                                                 _____ __ ________  ____   _____  ____  _____  _____ 
+                                                                                /  ___>  |  /   __\/  _/  /   __\/    \/  _  \/  _  \
+                                                                                |___  |  _ <|   __||  |---|   __|\-  -/|  |  ||  |  |
+                                                                                <_____/__|__\_____/\_____/\_____/ |__| \_____/\__|__/
+                                                     )",
+        R"(                                                                                |                                                   |
+                                                                                |                         .-.                       |
+                                                                                |                        (o.o)                      |
+                                                                                |                        _|=|_                      |
+                                                                                |                      //.=|=.\\                    |
+                                                                                |                     // .=|=. \\                   |
+                                                                                |                     \\ (_=_) //                   |
+                                                                                |                       (:| |:)                     |
+                                                                                |                        || ||                      |
+                                                                                |                        () ()                      |
+                                                                                |                        || ||                      |
+                                                                                |                       ==' '==                     |
+                                                                                |                                                   |
+                                                                                |                  Enemy damage: 10                 |
+                                                                                |                   Enemy hp: 100                   |)",
+        "easy"
+    },
+    {
+    R"(                                        .-')    ('-. .-.   ('-.     _ .-') _                 (`\ .-') /`            .-. .-')       .-') _                     ('-. .-. .-') _         
+                                       ( OO ). ( OO )  /  ( OO ).-.( (  OO) )                 `.( OO ),'          \  ( OO )     ( OO ) )                   ( OO )  /(  OO) )  
+                                      (_)---\_),--. ,--.  / . --. / \     .'_  .-'),-----. ,--./  .--.            ,--. ,--. ,--./ ,--,' ,-.-')   ,----.    ,--. ,--./     '._  
+                                      /    _ | |  | |  |  | \-.  \  ,`'--..._)( OO'  .-.  '|      |  |            |  .'   / |   \ |  |\ |  |OO) '  .-./-') |  | |  ||'--...__)
+                                      \  :` `. |   .|  |.-'-'  |  | |  |  \  '/   |  | |  ||  |   |  |,           |      /, |    \|  | )|  |  \ |  |_( O- )|   .|  |'--.  .--' 
+                                       '..`''.)|       | \| |_.'  | |  |   ' |\_) |  |\|  ||  |.'.|  |_)          |     ' _)|  .     |/ |  |(_/ |  | .--, \|       |   |  |        
+                                      .-._)   \|  .-.  |  |  .-.  | |  |   / :  \ |  | |  ||         |            |  .   \  |  |\    | ,|  |_.'(|  | '. (_/|  .-.  |   |  | 
+                                      \       /|  | |  |  |  | |  | |  '--'  /   `'  '-'  '|   ,'.   |            |  |\   \ |  | \   |(_|  |    |  '--'  | |  | |  |   |  | 
+                                       `-----' `--' `--'  `--' `--' `-------'      `-----' '--'   '--'            `--' '--' `--'  `--'  `--'     `------'  `--' `--'   `--')",
+        R"(                                                                                |                                                   |
+                                                                                |                         !                         |
+                                                                                |                        .-.                        |
+                                                                                |                      __|=|__                      |
+                                                                                |                     (_/`-`\_)                     |
+                                                                                |                     //\___/\\                     |
+                                                                                |                     <>/   \<>                     |
+                                                                                |                      \|_._|/                      |
+                                                                                |                       <_I_>                       |
+                                                                                |                        |||                        |
+                                                                                |                       /_|_\                       |
+                                                                                |                                                   |
+                                                                                |                  Enemy damage: 10                 |
+                                                                                |                   Enemy hp: 150                   |)",
+        "medium"
+    },
+    {
+    R"(                                                                                           _____                                                   
+                                                                    ____________     _____\    \_______    ______  ____________ _____             
+                                                                    \           \   /    / |    \      |  |      |/            \\    \            
+                                                                     \           \ /    /  /___/||     /  /     /|\___/\  \\___/\\    \           
+                                                                      |    /\     |    |__ |___|/|\    \  \    |/ \|____\  \___|/\\    \          
+                                                                      |   |  |    |       \      \ \    \ |    |        |  |      \|    | ______  
+                                                                      |    \/     |     __/ __    \|     \|    |   __  /   / __    |    |/      \ 
+                                                                      /           /|\    \  /  \    |\         /|  /  \/   /_/  |   /            | 
+                                                                     /___________/ | \____\/    |   | \_______/ | |____________/|  /_____/\_____/| 
+                                                                    |           | /| |    |____/|    \ |     | /  |           | / |      | |    || 
+                                                                    |___________|/  \|____|   | |     \|_____|/   |___________|/  |______|/|____|/ 
+                                                                                          |___|/                                                   )",
+        R"(                                                                                |                                                   |
+                                                                                |                              v                    |
+                                                                                |                        (__)v | v                  |
+                                                                                |                        /\/\\_|_/                  |
+                                                                                |                       _\__/  |                    |
+                                                                                |                      /  \/`\<`)                   |
+                                                                                |                      \ (  |\_/                    |
+                                                                                |                      /)))-(  |                    |
+                                                                                |                     / /^ ^ \ |                    |
+                                                                                |                    /  )^/\^( |                    |
+                                                                                |                    )_//`__>>                      |
+                                                                                |                                                   |
+                                                                                |                  Enemy damage: 20                 |
+                                                                                |                   Enemy hp: 200                   |)",
+        "hard"
+    }
+};
+
+void displayEnemies(const string& difficultyFilter) {
+
+    string spaces = " ";
+
+
+    for (const auto& e : enemies) {
+
+
+
+        if (difficultyFilter.empty() || e.difficulty == difficultyFilter) {
+
+            if (e.difficulty.length() == 6) {
+                spaces = "                ";
+            }
+            else {
+                spaces = "                  ";
+            }
+
+            cout << endl << endl << endl << endl << endl << e.name << endl << endl << endl << endl << endl << endl << endl << endl;
+            cout << R"(                                                                                +---------------------------------------------------+
+                                                                                |                                                   |
+                                                                                |                                                   |)" << endl;
+            cout << "                                                                                |                 Difficulty: " << e.difficulty << spaces << "|" << endl;
+            cout << e.ascii << endl;
+            cout << R"(                                                                                |                                                   |
+                                                                                |                                                   |
+                                                                                +---------------------------------------------------+)";
+        }
+    }
+}
+
+
+
+// 18
+
+
+
+
+
 void Enemies(string& n) {
     if (n == "Enemies") {
         while (true) {
             system("cls");
-            cout << enemy1 << endl << endl;
-            cout << "Chose option to Sort of dificulty or go back: ";
+
+cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << R"(                                                                    ______  __   __  ______  __    __  __  __       __      __  ______  ______  
+                                                                   /\  ___\/\ "-.\ \/\  ___\/\ "-./  \/\ \_\ \     /\ \    /\ \/\  ___\/\__  _\ 
+                                                                   \ \  __\\ \ \-.  \ \  __\\ \ \-./\ \ \____ \    \ \ \___\ \ \ \___  \/_/\ \/ 
+                                                                    \ \_____\ \_\\"\_\ \_____\ \_\ \ \_\/\_____\    \ \_____\ \_\/\_____\ \ \_\ 
+                                                                     \/_____/\/_/ \/_/\/_____/\/_/  \/_/\/_____/     \/_____/\/_/\/_____/  \/_/ 
+                                                                             )" << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+            cout << "Enter difficulty to filter (easy / medium / hard), or type 'all' to show all:" << endl;
+            cout << "Type 'back' to return or 'Quit' to exit: ";
+
+
             cin >> n;
 
             if (n == "back") {
@@ -45,25 +181,42 @@ void Enemies(string& n) {
                 break;
             }
 
-            if (n == "Quit") {
-                exitMessage();
-                break;
+            system("cls");
+            if (n == "easy" || n == "medium" || n == "hard") {
+                displayEnemies(n);
             }
+            else if (n == "all") {
+                displayEnemies();
+            }
+            else {
+                cout << "Invalid option. Try again." << endl;
+            }
+
+            cout << "\nPress Enter to continue:";
+            cin.ignore();
+            cin.get();
         }
     }
 }
+
+
+
+
+
+
+
 
 
 void choseOptionPlay(string& n) {
     cout << endl;
     bool validOption = false;
 
-    while (hp > 0 && EnemyHp > 0) {
+    while (hp > 0 && EnemyHp1 > 0) {
         cout << "Choose an option (NormalAttack / SpecialAttack / EndRound / back): ";
         cin >> n;
 
         if (n == "NormalAttack") {
-               EnemyHp = EnemyHp - PlayerDamage;
+               EnemyHp1 = EnemyHp1 - PlayerDamage;
                system("cls");
                View_of_fight();
                View_fight_options();
@@ -71,7 +224,12 @@ void choseOptionPlay(string& n) {
                    cout << "EndRound:  ";
                    cin >> n;
                    if (n == "EndRound") {
-                       gamecount = gamecount - 1;
+                       AbilityCount = AbilityCount - 1;
+
+                       if (AbilityCount < 0) {
+                           AbilityCount = 0;
+                       }
+
                        GameSystem();
                        system("cls");
                        View_of_fight();
@@ -80,11 +238,11 @@ void choseOptionPlay(string& n) {
                }
         }
         else if (n == "SpecialAttack") {
-            if (gamecount == 0) {
+            if (AbilityCount == 0) {
                 if (mana >= 20) {
-                    EnemyHp -= PlayerSpecialDamage;
+                    EnemyHp1 -= PlayerSpecialDamage;
                     mana -= ManaCost;
-                    gamecount = 3;
+                    AbilityCount = 3;
                     system("cls");
                     View_of_fight();
                     View_fight_options();
@@ -92,7 +250,7 @@ void choseOptionPlay(string& n) {
                         cout << "EndRound:  ";
                         cin >> n;
                         if (n == "EndRound") {
-                            gamecount = gamecount - 1;
+                            AbilityCount = AbilityCount - 1;
                             GameSystem();
                             system("cls");
                             View_of_fight();
@@ -105,12 +263,12 @@ void choseOptionPlay(string& n) {
                 }
             }
             else {
-                cout << "Rounds left to use Special Attack: " << gamecount << endl;
+                cout << "Rounds left to use Special Attack: " << AbilityCount << endl;
             }
                 
         }
         else if (n == "EndRound") {
-            gamecount = gamecount - 1;
+            AbilityCount = AbilityCount - 1;
             GameSystem();
             system("cls");
             View_of_fight();
@@ -119,8 +277,8 @@ void choseOptionPlay(string& n) {
         else if (n == "back") {
             hp = 100;
             mana = 100;
-            EnemyHp = 200;
-            gamecount = 0;
+            EnemyHp1 = 200;
+            AbilityCount = 0;
             system("cls");
             title();
             options();
@@ -131,7 +289,7 @@ void choseOptionPlay(string& n) {
             cout << "Option not found. Try again." << endl;
         }
 
-        if (hp <= 0 || EnemyHp <= 0) break;
+        if (hp <= 0 || EnemyHp1 <= 0) break;
     }
 }
 
@@ -426,7 +584,6 @@ R"(               |        /                           ||                       
 "               |        |                           ||                            |                           "
 };
 
-
     if (id == 1) {
         pasiws = item1;
         hp = 100;
@@ -434,6 +591,11 @@ R"(               |        /                           ||                       
         hp = hp + 30;
         enemydefshield = enemydef1;
         shield = 50;
+
+        hp2 = hp;
+        mana2 = mana;
+        shield2 = shield;
+
     }
     else if (id == 2) {
         pasiws = item2;
@@ -443,6 +605,11 @@ R"(               |        /                           ||                       
         mana = mana + 15;
         enemydefshield = enemydef2;
         shield = 65;
+
+        hp2 = hp;
+        mana2 = mana;
+        shield2 = shield;
+
     }
     else if (id == 3) {
         pasiws = item3;
@@ -451,21 +618,26 @@ R"(               |        /                           ||                       
         mana = mana + 30;
         enemydefshield = enemydef3;
         shield = 50;
+
+        hp2 = hp;
+        mana2 = mana;
+        shield2 = shield;
+
     }
 }
 
 void GameSystem() {
         if (shield > 0) {
            shield = shield - 10;
-           hp = hp - EndmyDamage + 10;
+           hp = hp - EndmyDamage1 + 10;
         }
         else {
-           hp = hp - EndmyDamage;
+           hp = hp - EndmyDamage1;
         }
 
 
     if (hp <= 0) {
-        cout << "Game Over!" << endl;
+        GameOver();
         string choice;
         while (true) {
             cout << "Choose: quit / back: ";
@@ -475,10 +647,9 @@ void GameSystem() {
                 break;
             }
             else if (choice == "back") {
-                hp = 100;
-                mana = 100;
-                shield = shield;
-                EnemyHp = 200;
+                hp = hp2;
+                mana = mana2;
+                shield = shield2;
                 system("cls");
                 title();
                 options();
@@ -490,25 +661,61 @@ void GameSystem() {
             }
         }
     }
-    else if (EnemyHp <= 0) {
+    else if (EnemyHp1 <= 0) {
+        system("cls");
+        hp = hp2;
+        mana = mana2;
+        shield = shield2;
+        EnemyHp1 = EnemyHp2;
+        EndmyDamage1 = EndmyDamage2;
+        enemy1 = enemy2;
+        Layer2View();
+        system("cls");
+        View_of_fight();
+        View_fight_options();
+    }
+    else if (EnemyHp2 <= 0) {
+        system("cls");
+        hp = hp2;
+        mana = mana2;
+        shield = shield2;
+        EnemyHp2 = EnemyHp1;
+        EndmyDamage2 = EndmyDamage3;
+        enemy2 = enemy3;
+        Layer3View();
+        system("cls");
+        View_of_fight();
+        View_fight_options();
+    }
+    else if (EnemyHp1 <= 0) {
         Victory();
         string choice;
         while (true) {
-            cout << "Choose: quit / back: ";
+            cout << "Choose: quit / back / play again: ";
             cin >> choice;
             if (choice == "quit") {
                 exitMessage();
                 break;
             }
             else if (choice == "back") {
-                hp = 100;
-                mana = 100;
-                EnemyHp = 200;
+                hp = hp2;
+                mana = mana2;
+                shield = shield2;
                 system("cls");
                 title();
                 options();
                 input();
                 break;
+            }
+            else if (choice == "play again") {
+                hp = hp2;
+                mana = mana2;
+                shield = shield2;
+                system("cls");
+                Layer1View();
+                system("cls");
+                View_of_fight();
+                View_fight_options();
             }
             else {
                 cout << "Invalid choice. Try again." << endl;

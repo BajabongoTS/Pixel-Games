@@ -62,8 +62,20 @@ std::vector<std::string> wepdef = { "                                           
 "                                                                                         |.",
 "                                                                                         |.",
 "                                                                                         |."};
+string enemy1 = R"(               |                                                                                      .-.                                                                                             |.
+               |                                                                                    (o.o)                                                                                              |.
+               |                                                                                    _|=|_                                                                                              |.
+               |                                                                                  //.=|=.\\                                                                                            |.
+               |                                                                                 // .=|=. \\                                                                                           |.
+               |                                                                                 \\ (_=_) //                                                                                           |.
+               |                                                                                   (:| |:)                                                                                             |.
+               |                                                                                    || ||                                                                                              |.
+               |                                                                                    () ()                                                                                              |.
+               |                                                                                    || ||                                                                                              |.
+               |                                                                                   ==' '==                                                                                             |.)";
 
-string enemy1 = R"(               |                                                                                       !                                                                                               |.
+
+string enemy2 = R"(               |                                                                                       !                                                                                               |.
                |                                                                                      .-.                                                                                              |.
                |                                                                                    __|=|__                                                                                            |.
                |                                                                                   (_/`-`\_)                                                                                           |.
@@ -74,6 +86,19 @@ string enemy1 = R"(               |                                             
                |                                                                                      |||                                                                                              |.
                |                                                                                     /_|_\                                                                                             |.)";
 
+string enemy3 = R"(               |                                                                                                 v                                                                                     |.
+               |                                                                                    (__)v | v                                                                                          |.
+               |                                                                                    /\/\\_|_/                                                                                          |.
+               |                                                                                   _\__/  |                                                                                            |.
+               |                                                                                  /  \/`\<`)                                                                                           |.
+               |                                                                                  \ (  |\_/                                                                                            |.
+               |                                                                                  /)))-(  |                                                                                            |.
+               |                                                                                 / /^ ^ \ |                                                                                            |.
+               |                                                                                /  )^/\^( |                                                                                            |.
+               |                                                                                )_//`__>>                                                                                              |.)";
+
+
+
 
 Hp hp = 100;
 
@@ -81,21 +106,21 @@ Mana mana = 100;
 
 Shield shield = 10;
 
-Hp EnemyHp = 200;
-
-Damage EndmyDamage = 20;
-
 Damage PlayerSpecialDamage = 15;
 
 Mana ManaCost = 20;
 
 Damage PlayerDamage = 10;
 
-Shield shield2 = 10;
+Damage EndmyDamage1 = 10;
+Hp EnemyHp1 = 100;
 
-Hp hp2 = 100;
+Damage EndmyDamage2 = 10;
+Hp EnemyHp2 = 150;
 
-Mana mana2 = 100;
+Damage EndmyDamage3 = 20;
+Hp EnemyHp3 = 200;
+
 
 void studio(atomic<bool>& running) {
     for (int i = 0; i < 13; ++i) cout << endl;
@@ -477,24 +502,77 @@ void showItemsAndPasiws() {
     }
 }
 
-void LevelFunction(atomic<bool>& running) {
+void Layer1Function(atomic<bool>& running) {
     for (int i = 0; i < 21; ++i) cout << endl;
 
-    cout << R"(
-                                                                                   __                              ___          _     
-                                                                                  /\ \                            /\_ \       /' \    
-                                                                                  \ \ \         __   __  __     __\//\ \     /\_, \   
-                                                                                   \ \ \  __  /'__`\/\ \/\ \  /'__`\\ \ \    \/_/\ \  
-                                                                                    \ \ \L\ \/\  __/\ \ \_/ |/\  __/ \_\ \_     \ \ \ 
-                                                                                     \ \____/\ \____\\ \___/ \ \____\/\____\     \ \_\
-                                                                                      \/___/  \/____/ \/__/   \/____/\/____/      \/_/
+    cout << R"(                                                                         __      ______   __    __  ____    ____           _     
+                                                                            /\ \    /\  _  \ /\ \  /\ \/\  _`\ /\  _`\       /' \    
+                                                                            \ \ \   \ \ \L\ \\ `\`\\/'/\ \ \L\_\ \ \L\ \    /\_, \   
+                                                                             \ \ \  _\ \  __ \`\ `\ /'  \ \  _\L\ \ ,  /    \/_/\ \  
+                                                                              \ \ \L\ \ \ \/\ \ `\ \ \   \ \ \L\ \ \ \\ \      \ \ \ 
+                                                                               \ \____/\ \_\ \_\  \ \_\   \ \____/\ \_\ \_\     \ \_\
+                                                                                \/___/  \/_/\/_/   \/_/    \/___/  \/_/\/ /      \/_/
+                                                         
+                                                         
 )";
     this_thread::sleep_for(chrono::milliseconds(100)); // interwał
 }
 
-void LevelView() {
+void Layer1View() {
     atomic<bool> running{ true };
-    thread worker(LevelFunction, ref(running));
+    thread worker(Layer1Function, ref(running));
+
+    this_thread::sleep_for(chrono::seconds(3)); // czas trwania
+    running = false;
+
+    worker.join();
+}
+
+void Layer2Function(atomic<bool>& running) {
+    for (int i = 0; i < 21; ++i) cout << endl;
+
+    cout << R"(                                                                          __                                              ___     
+                                                                         /\ \                                           /'___`\   
+                                                                         \ \ \         __    __  __     __   _ __      /\_\ /\ \  
+                                                                          \ \ \  __  /'__`\ /\ \/\ \  /'__`\/\`'__\    \/_/// /__ 
+                                                                           \ \ \L\ \/\ \L\.\\ \ \_\ \/\  __/\ \ \/        // /_\ \
+                                                                            \ \____/\ \__/.\_\/`____ \ \____\\ \_\       /\______/
+                                                                             \/___/  \/__/\/_/`/___/> \/____/ \/_/       \/_____/ 
+                                                                                                 /\___/                           
+                                                                                                 \/__/                            
+)";
+    this_thread::sleep_for(chrono::milliseconds(100)); // interwał
+}
+
+void Layer2View() {
+    atomic<bool> running{ true };
+    thread worker(Layer2Function, ref(running));
+
+    this_thread::sleep_for(chrono::seconds(3)); // czas trwania
+    running = false;
+
+    worker.join();
+}
+
+void Layer3Function(atomic<bool>& running) {
+    for (int i = 0; i < 21; ++i) cout << endl;
+
+    cout << R"(                                                                          __                                             __     
+                                                                         /\ \                                          /'__`\   
+                                                                         \ \ \         __    __  __     __   _ __     /\_\L\ \  
+                                                                          \ \ \  __  /'__`\ /\ \/\ \  /'__`\/\`'__\   \/_/_\_<_ 
+                                                                           \ \ \L\ \/\ \L\.\\ \ \_\ \/\  __/\ \ \/      /\ \L\ \
+                                                                            \ \____/\ \__/.\_\/`____ \ \____\\ \_\      \ \____/
+                                                                             \/___/  \/__/\/_/`/___/> \/____/ \/_/       \/___/ 
+                                                                                                /\___/                         
+                                                                                                \/__/                          
+)";
+    this_thread::sleep_for(chrono::milliseconds(100)); // interwał
+}
+
+void Layer3View() {
+    atomic<bool> running{ true };
+    thread worker(Layer3Function, ref(running));
 
     this_thread::sleep_for(chrono::seconds(3)); // czas trwania
     running = false;
@@ -505,10 +583,10 @@ void LevelView() {
 void View_of_fight() {
                    
     cout << R"(             _________________________________________________________________________________________________________________________________________________________________________________________)" << endl;
-    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage << "                                                   |   Your Stats       PlayerDamege: " << PlayerDamage << "       SpecialAttack: " << gamecount << R"(                                   \.)" << endl;
+    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage1 << "                                                   |   Your Stats       PlayerDamege: " << PlayerDamage << "       SpecialAttack: " << AbilityCount << R"(                                   \.)" << endl;
     cout << R"(           |   |                                        Hp:                                            |               Shield                         Hp:                        Mana:                 |.
             \__|                           +--------------------------+                                |         +---------------------+     +---------------------+     +---------------------+       |.)" << endl;
-    cout << "               |                           |###########" << EnemyHp << "############|                                |         |##########" << shield << "#########|     |#########" << hp << "#########|     |#########" << mana << "#########|       |." << endl;
+    cout << "               |                           |###########" << EnemyHp1 << "############|                                |         |##########" << shield << "#########|     |#########" << hp << "#########|     |#########" << mana << "#########|       |." << endl;
     cout << R"(               |                           +--------------------------+                                |         +---------------------+     +---------------------+     +---------------------+       |.
                |_______________________________________________________________________________________|_______________________________________________________________________________________________|.
                |                                                                                                                                                                                       |.)" << endl;
