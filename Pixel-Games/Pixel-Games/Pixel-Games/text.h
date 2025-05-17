@@ -14,6 +14,10 @@ extern std::string ability;
 extern std::vector<std::string> enemydefshield;
 extern std::vector<std::string> wepdef;
 
+extern std::string enemy1;
+
+extern int gamecount;
+
 typedef int Shield;
 typedef int Hp;
 typedef int Mana;
@@ -23,8 +27,15 @@ typedef int Damage;
 extern Shield shield;
 extern Hp hp;
 extern Mana mana;
+
+extern Shield shield2;
+extern Hp hp2;
+extern Mana mana2;
+
 extern Damage PlayerDamage;
-extern Damage EnemyDamage;
+extern Damage EndmyDamage;
+extern Damage PlayerSpecialDamage;
+extern Mana ManaCost;
 extern Hp EnemyHp;
 
 void title();
@@ -32,6 +43,15 @@ void title();
 void options();
 
 void input();
+
+void studio(std::atomic<bool>& running);
+
+void IntroView();
+
+void Victory();
+
+void GameOver();
+
 
 // Inventory
 

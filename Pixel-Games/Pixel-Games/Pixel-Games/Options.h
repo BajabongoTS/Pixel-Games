@@ -15,6 +15,8 @@ void goback(std::string& n);
 
 void UpLevelFight(int id);
 
+void GameSystem();
+
 // Invoentory
 void gotoInventory(std::string& n);
 

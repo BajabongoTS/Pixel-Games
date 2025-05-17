@@ -7,6 +7,8 @@
 
 using namespace std;
 
+int gamecount = 0;
+
 // Game
 
 void startGame(string& n) {
@@ -29,45 +31,111 @@ void startGame(string& n) {
 
 void Enemies(string& n) {
     if (n == "Enemies") {
-        system("cls");
-        cout << "cos";
+        while (true) {
+            system("cls");
+            cout << enemy1 << endl << endl;
+            cout << "Chose option to Sort of dificulty or go back: ";
+            cin >> n;
 
-        
+            if (n == "back") {
+                system("cls");
+                title();
+                options();
+                input();
+                break;
+            }
 
-        if (n == "Quit") exitMessage();
+            if (n == "Quit") {
+                exitMessage();
+                break;
+            }
+        }
     }
 }
 
 
 void choseOptionPlay(string& n) {
-    for (int i = 0; i < 1; ++i) cout << endl;
-
+    cout << endl;
     bool validOption = false;
-    while (!validOption) {
-        cout << "Choose an option (Normal Attack / Super Attack / back): ";
+
+    while (hp > 0 && EnemyHp > 0) {
+        cout << "Choose an option (NormalAttack / SpecialAttack / EndRound / back): ";
         cin >> n;
 
-        if (n == "NormalAttak") {
-            cout << "Normal" << endl;
+        if (n == "NormalAttack") {
+               EnemyHp = EnemyHp - PlayerDamage;
+               system("cls");
+               View_of_fight();
+               View_fight_options();
+               while (n != "EndRound") {
+                   cout << "EndRound:  ";
+                   cin >> n;
+                   if (n == "EndRound") {
+                       gamecount = gamecount - 1;
+                       GameSystem();
+                       system("cls");
+                       View_of_fight();
+                       View_fight_options();
+                   }
+               }
         }
-        else if (n == "SpecialAttak") {
-            cout << "Special!!" << endl;
+        else if (n == "SpecialAttack") {
+            if (gamecount == 0) {
+                if (mana >= 20) {
+                    EnemyHp -= PlayerSpecialDamage;
+                    mana -= ManaCost;
+                    gamecount = 3;
+                    system("cls");
+                    View_of_fight();
+                    View_fight_options();
+                    while (n != "EndRound") {
+                        cout << "EndRound:  ";
+                        cin >> n;
+                        if (n == "EndRound") {
+                            gamecount = gamecount - 1;
+                            GameSystem();
+                            system("cls");
+                            View_of_fight();
+                            View_fight_options();
+                        }
+                    }
+                }
+                else {
+                    cout << "Not enough mana for Special Attack!" << endl;
+                }
+            }
+            else {
+                cout << "Rounds left to use Special Attack: " << gamecount << endl;
+            }
+                
+        }
+        else if (n == "EndRound") {
+            gamecount = gamecount - 1;
+            GameSystem();
+            system("cls");
+            View_of_fight();
+            View_fight_options();
         }
         else if (n == "back") {
             hp = 100;
             mana = 100;
             EnemyHp = 200;
-            break;
+            gamecount = 0;
             system("cls");
             title();
             options();
             input();
+            break;
         }
         else {
             cout << "Option not found. Try again." << endl;
         }
+
+        if (hp <= 0 || EnemyHp <= 0) break;
     }
 }
+
+
 
 void gotoInventory(string& n) {
     if (n == "Inventory") {
@@ -153,11 +221,6 @@ void choseOption(string& n) {
 }
 
 
-// Dla obu 
-
-void goback(string& n) {
-    
-}
 
 void gameLoop(string& n) {
     if (n == "Quit") {
@@ -219,17 +282,7 @@ void WeponChange(int id) {
 )";
 
 
-vector<string> wepdef1 = { "                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-R"(                                         __                                              |.)",
+vector<string> wepdef1 = { R"(                                         __                                              |.)",
 R"(                                        /  \                                             |.)",
 R"(                                       / \  \                                            |.)",
 R"(                                      /   \  \                                           |.)",
@@ -245,17 +298,7 @@ R"(                                            \  \\  \  \                      
 R"(                                             \  \\  \  \                                 |.)" };
     
 
-vector<string> wepdef2 = { "                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-R"(                                                                                         |.)",
+vector<string> wepdef2 = { R"(                                                                                         |.)",
 R"(                                        /\                                               |.)",
 R"(                                       / \\                                              |.)",
 R"(                                      / \ \\                                             |.)",
@@ -271,17 +314,7 @@ R"(                                            \/\  \ \\                        
 R"(                                             \/   \ \\                                   |.)" };
 
 
-vector<string> wepdef3 = { "                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-"                                                                                         |.",
-R"(                                                                                         |.)",
+vector<string> wepdef3 = { R"(                                                                                         |.)",
 R"(                                        _____                                            |.)",
 R"(                                   ____/  \  \                                           |.)",
 R"(                                   \   \   \  \                                          |.)",
@@ -299,18 +332,27 @@ R"(                                             \   \  \                        
     if (id == 1) {
         items = item1;
         ability = item4;
-        PlayerDamage = PlayerDamage + 10;
+        PlayerDamage = 30;
         wepdef = wepdef1;
+        PlayerSpecialDamage = PlayerDamage + 10;
+        ManaCost = 30;
     }
     else if (id == 2) {
         items = item2;
         ability = item5;
         PlayerDamage = 20;
+        wepdef = wepdef2;
+        PlayerSpecialDamage = 80;
+        ManaCost = 50;
     }
     else if (id == 3) {
         items = item3;
         ability = item6;
         PlayerDamage = 20;
+        wepdef = wepdef3;
+        PlayerSpecialDamage = 40;
+        hp = hp + 10;
+        ManaCost = 60;
     }
 }
 
@@ -335,17 +377,7 @@ void PasiweItemChange(int id) {
 |             -----            |.)";
 
 
-vector<string> enemydef1 = {"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
+vector<string> enemydef1 = { "               |                                                                                              ",
 "               |                                                                                              ",
 "               |                                                                                              ",
 "               |                                                                                              ",
@@ -370,16 +402,6 @@ vector<string> enemydef3 = { "               |                                  
 "               |                                                                                              ",
 "               |                                                                                              ",
 "               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
 R"(               |          |\_______________.---------------------.______________/|                            )",
 R"(               |         /########################################################\                           )",
 R"(               |         \##########################/||\##########################/                           )",
@@ -389,16 +411,6 @@ R"(               |           \######################(0(())0)###################
 
 
 vector<string> enemydef2 = { "               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
-"               |                                                                                              ",
 "               |                                                                                              ",
 "               |                                                                                              ",
 "               |                                                                                              ",
@@ -442,3 +454,65 @@ R"(               |        /                           ||                       
     }
 }
 
+void GameSystem() {
+        if (shield > 0) {
+           shield = shield - 10;
+           hp = hp - EndmyDamage + 10;
+        }
+        else {
+           hp = hp - EndmyDamage;
+        }
+
+
+    if (hp <= 0) {
+        cout << "Game Over!" << endl;
+        string choice;
+        while (true) {
+            cout << "Choose: quit / back: ";
+            cin >> choice;
+            if (choice == "quit") {
+                exitMessage();
+                break;
+            }
+            else if (choice == "back") {
+                hp = 100;
+                mana = 100;
+                shield = shield;
+                EnemyHp = 200;
+                system("cls");
+                title();
+                options();
+                input();
+                break;
+            }
+            else {
+                cout << "Invalid choice. Try again." << endl;
+            }
+        }
+    }
+    else if (EnemyHp <= 0) {
+        Victory();
+        string choice;
+        while (true) {
+            cout << "Choose: quit / back: ";
+            cin >> choice;
+            if (choice == "quit") {
+                exitMessage();
+                break;
+            }
+            else if (choice == "back") {
+                hp = 100;
+                mana = 100;
+                EnemyHp = 200;
+                system("cls");
+                title();
+                options();
+                input();
+                break;
+            }
+            else {
+                cout << "Invalid choice. Try again." << endl;
+            }
+        }
+    }
+}

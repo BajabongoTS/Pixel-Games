@@ -13,6 +13,9 @@ int main() {
     string n;
 
     while (true) {
+        //IntroView();
+        //system("cls");
+
         // Title screen
         system("cls");
         title();
@@ -43,6 +46,8 @@ int main() {
             exitMessage();
             break;
         }
+
+        Enemies(n);
     }
 
     return 0;
