@@ -17,7 +17,9 @@ extern std::vector<std::string> wepdef;
 extern std::string enemy1;
 extern std::string enemy2;
 extern std::string enemy3;
+extern std::string enemydef;
 
+extern std::string initialEnemy1;
 
 extern int gamecount;
 extern int AbilityCount;
