@@ -12,14 +12,14 @@ int AbilityCount = 0;
 int gamecount = 0;
 
 
-Hp hp2;;
+Hp hp2;
 Mana mana2;
 Shield shield2;
 
 // Game
 
 void startGame(string& n) {
-    if (n == "Play") {
+    if (n == "Play" || n == "play") {
         system("cls");
 
         Layer1View();
@@ -159,7 +159,7 @@ void displayEnemies(const string& difficultyFilter) {
 
 
 void Enemies(string& n) {
-    if (n == "Enemies") {
+    if (n == "Enemies" || n == "enemies") {
         while (true) {
             system("cls");
 
@@ -175,7 +175,7 @@ cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << 
 
             cin >> n;
 
-            if (n == "back") {
+            if (n == "back" || n == "Back") {
                 system("cls");
                 title();
                 options();
@@ -217,7 +217,7 @@ void choseOptionPlay(string& n) {
         cout << "Choose an option (NormalAttack / SpecialAttack / EndRound / back): ";
         cin >> n;
 
-        if (n == "NormalAttack") {
+        if (n == "NormalAttack" || n == "normalAttack" || n == "Normalattack" || n == "normalattack" || n == "Normal Attack" || n == "normal Attack" || n == "Normal attack" || n == "normal attack") {
                EnemyHp1 = EnemyHp1 - PlayerDamage;
                system("cls");
                View_of_fight();
@@ -236,7 +236,7 @@ void choseOptionPlay(string& n) {
                        View_of_fight();
                        View_fight_options();
         }
-        else if (n == "HpPotion") {
+        else if (n == "HpPotion" || n == "hpPotion" || n == "Hppotion" || n == "hppotion" || n == "Hp Potion" || n == "hp Potion" || n == "Hp potion" || n == "hp potion") {
             if (HpPotion > 0) {
                 HpPotion = HpPotion - 20;
                 hp = hp + 20;
@@ -249,7 +249,7 @@ void choseOptionPlay(string& n) {
             View_of_fight();
             View_fight_options();
         }
-        else if (n == "ManaPotion") {
+        else if (n == "ManaPotion" || n == "manaPotion" || n == "Manapotion" || n == "manapotion" || n == "Mana Potion" || n == "mana Potion" || n == "Mana potion" || n == "mana potion") {
             if (ManaPotion > 0) {
                ManaPotion = ManaPotion - 20;
                 mana = mana + 20; 
@@ -262,7 +262,7 @@ void choseOptionPlay(string& n) {
             View_of_fight();
             View_fight_options();
         }
-        else if (n == "SpecialAttack") {
+        else if (n == "SpecialAttack" || n == "specialAttack" || n == "Specialattack" || n == "specialattack" || n == "Special Attack" || n == "special Attack" || n == "Special attack" || n == "special attack") {
             if (AbilityCount == 0) {
                 if (mana >= 20) {
                     EnemyHp1 -= PlayerSpecialDamage;
@@ -294,7 +294,7 @@ void choseOptionPlay(string& n) {
             }
                 
         }
-        else if (n == "EndRound") {
+        else if (n == "EndRound" || n == "endRound" || n == "Endround" || n == "End Round" || n == "end Round" || n == "End round" || n == "end round") {
             AbilityCount = AbilityCount - 1;
 
             if (AbilityCount < 0) {
@@ -306,7 +306,7 @@ void choseOptionPlay(string& n) {
             View_of_fight();
             View_fight_options();
         }
-        else if (n == "back") {
+        else if (n == "back" || n == "Back") {
             hp = hp2;
             mana = mana2;
             shield = shield2;
@@ -330,18 +330,18 @@ void choseOptionPlay(string& n) {
 
 
 void gotoInventory(string& n) {
-    if (n == "Inventory") {
+    if (n == "Inventory" || n == "inventory") {
         while (true) {
             system("cls");
             viewArmor();
             Options_of_Wepons_or_PasiweItem();
             choseOption(n);
 
-            if (n == "Quit") {
+            if (n == "Quit" || n == "quit") {
                 exitMessage();
                 break;
             }
-            else if (n == "back") {
+            else if (n == "back" || n == "Back") {
                 break;
             }
         }
@@ -353,10 +353,10 @@ void choseOption(string& n) {
     bool inInventory = true;
     while (inInventory) {
         cout << endl;
-        cout << "Choose an option (Wepons / PasiweItems / ChangeWepon / ChangePasiwe / back): ";
+        cout << "Choose an option (Wepons / Shields / ChangeWepon / ChangeShield / back): ";
         cin >> n;
 
-        if (n == "Weapons") {
+        if (n == "Weapons" || n == "weapons") {
             while (true) {
                 system("cls");
                 AsciiWeapons::viewWeapon(AsciiWeapons::sword);
@@ -370,13 +370,13 @@ void choseOption(string& n) {
                 }
             }
         }
-        else if (n == "Shields") {
+        else if (n == "Shields" || n == "shields") {
             while (true) {
                 system("cls");
                 AsciiWeapons::viewPasiweItem(AsciiWeapons::shields);
                 cout << "\nType 'back' to return to inventory: ";
                 cin >> n;
-                if (n == "back") {
+                if (n == "back" || n == "Back") {
                     system("cls");
                     viewArmor();
                     Options_of_Wepons_or_PasiweItem();
@@ -384,7 +384,7 @@ void choseOption(string& n) {
                 }
             }
         }
-        else if (n == "ChangeWeapon") {
+        else if (n == "ChangeWeapon" || n == "changeWeapon" || n == "Changeweapon" || n == "changeweapon" || n == "Change Weapon" || n == "change Weapon" || n == "Change weapon" || n == "change weapon") {
             int id;
             cin >> id;
             WeponChange(id);
@@ -393,7 +393,7 @@ void choseOption(string& n) {
             Options_of_Wepons_or_PasiweItem();
             cout << endl;
         }
-        else if (n == "ChangeShield") {
+        else if (n == "ChangeShield" || n == "changeSchield" || n == "Changeschield" || n == "changeshield" || n == "Change Shield" || n == "change Shield" || n == "Change shield" || n == "change shield") {
             int id;
             cin >> id;
             PasiweItemChange(id);
@@ -676,45 +676,12 @@ void GameSystem() {
         for (int i = 0; i <= 10; ++i) cout << endl;
         string choice;
         while (true) {
-            cout << "   Choose: quit / back / play again: ";
+            cout << "   Choose: quit: ";
             cin >> choice;
 
-            if (choice == "quit") {
+            if (choice == "quit" || choice == "Quit") {
                 exitMessage();
-                exit(0);  // To ensure program actually exits
-            }
-            else if (choice == "back") {
-                hp = hp2;
-                mana = mana2;
-                shield = shield2;
-                EnemyHp1 = 100;
-                enemy1 = enemydef;
-                AbilityCount = 0;
-                system("cls");
-                title();
-                options();
-                input();
-                break;
-            }
-            else if (choice == "play" || choice == "play again") {
-                hp = hp2;
-                mana = mana2;
-                shield = shield2;
-                EnemyHp1 = 100;
-                EnemyHp2 = 150;
-                EnemyHp3 = 200;
-                AbilityCount = 0;
-                enemy1 = enemydef;
-                system("cls");
-                Layer1View();
-                system("cls");
-                View_of_fight();
-                View_fight_options();
-
-                // Get a new input string to start the game again
-                string n = "Play";
-                choseOptionPlay(n);
-                return;  // Return directly to avoid going back to title screen
+                exit(0);
             }
             else {
                 cout << "Invalid choice. Try again." << endl;
@@ -753,47 +720,12 @@ void GameSystem() {
             for (int i = 0; i <= 10; ++i) cout << endl;
             string choice;
             while (true) {
-                cout << "   Choose: quit / back / play again: ";
+                cout << "   Choose: quit: ";
                 cin >> choice;
 
-                if (choice == "quit") {
+                if (choice == "quit" || choice == "Quit") {
                     exitMessage();
-                    exit(0);  // To ensure program actually exits
-                }
-                else if (choice == "back") {
-                    hp = hp2;
-                    mana = mana2;
-                    shield = shield2;
-                    EnemyHp1 = 100;
-                    EnemyHp2 = 150;
-                    EnemyHp3 = 200;
-                    enemy1 = enemydef;
-                    AbilityCount = 0;
-                    system("cls");
-                    title();
-                    options();
-                    input();
-                    break;
-                }
-                else if (choice == "play" || choice == "play again") {
-                    hp = hp2;
-                    mana = mana2;
-                    shield = shield2;
-                    EnemyHp1 = 100;
-                    EnemyHp2 = 150;
-                    EnemyHp3 = 200;
-                    AbilityCount = 0;
-                    enemy1 = enemydef;
-                    system("cls");
-                    Layer1View();
-                    system("cls");
-                    View_of_fight();
-                    View_fight_options();
-
-                    // Get a new input string to start the game again
-                    string n = "Play";
-                    choseOptionPlay(n);
-                    return;  // Return directly to avoid going back to title screen
+                    exit(0);
                 }
                 else {
                     cout << "Invalid choice. Try again." << endl;
