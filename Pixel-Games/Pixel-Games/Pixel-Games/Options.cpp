@@ -170,7 +170,7 @@ cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << 
                                                                      \/_____/\/_/ \/_/\/_____/\/_/  \/_/\/_____/     \/_____/\/_/\/_____/  \/_/ 
                                                                              )" << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
             cout << "Enter difficulty to filter (easy / medium / hard), or type 'all' to show all:" << endl;
-            cout << "Type 'back' to return or 'Quit' to exit: ";
+            cout << "Type 'back' to return: ";
 
 
             cin >> n;
@@ -356,7 +356,7 @@ void choseOption(string& n) {
         cout << "Choose an option (Wepons / PasiweItems / ChangeWepon / ChangePasiwe / back): ";
         cin >> n;
 
-        if (n == "Wepons") {
+        if (n == "Weapons") {
             while (true) {
                 system("cls");
                 AsciiWeapons::viewWeapon(AsciiWeapons::sword);
@@ -370,7 +370,7 @@ void choseOption(string& n) {
                 }
             }
         }
-        else if (n == "PasiweItems") {
+        else if (n == "Shields") {
             while (true) {
                 system("cls");
                 AsciiWeapons::viewPasiweItem(AsciiWeapons::shields);
@@ -384,7 +384,7 @@ void choseOption(string& n) {
                 }
             }
         }
-        else if (n == "ChangeWepon") {
+        else if (n == "ChangeWeapon") {
             int id;
             cin >> id;
             WeponChange(id);
@@ -393,7 +393,7 @@ void choseOption(string& n) {
             Options_of_Wepons_or_PasiweItem();
             cout << endl;
         }
-        else if (n == "ChangePasiwe") {
+        else if (n == "ChangeShield") {
             int id;
             cin >> id;
             PasiweItemChange(id);
@@ -451,14 +451,14 @@ void WeponChange(int id) {
                                                                           |                  /___\    
                                                                           |                           )";
 
-    string item4 = R"(               |                                                                                                                                              |         ///  /\                        |.
+    string item4 = R"(               |                                                                                                                                                       |         ///  /\                        |.
                |                                                                                                                                              |        ///   \ \                       |.
                |                                                                                                                                              |       ///     \ \______/########]      |.
                |                                                                                                                                              |        ///     \--------/              |.
 )";
 
 
-    string item5 = R"(                     |                                                                                                                                                |                 _____                  |.
+    string item5 = R"(                     |                                                                                                                                                 |                 _____                  |.
                |                                                                                                                                              |                /     \                 |.
                |                                                                                                                                              |               | () () |                |.
                |                                                                                                                                              |                \  ^  /                 |.
@@ -467,7 +467,7 @@ void WeponChange(int id) {
 )";
 
 
-    string item6 = R"(               |                                                                                                                                              |           [---\\/---]                  |.
+    string item6 = R"(               |                                                                                                                                                       |           [---\\/---]                  |.
                |                                                                                                                                              |            \###\\###/                  |.
                |                                                                                                                                              |             ----\\--                   |.
                |                                                                                                                                              |                  \\                    |.
@@ -580,9 +580,9 @@ vector<string> enemydef1 = { "               |                                  
 "               |                                                                                              ",
 "               |         _________________________________________________________                            ",
 R"(               |        /(__6____#___3____####3)####||#############uy#############\                           )",
-R"(               |       \(__6_12___#___3____####3)###||#############################/                         )",
-R"(               |        \(__6_7___#___3____####3)()0||####de######################/                          )",
-R"(               |         \7___# (0)3____####3)()0__)||###############aw##########/                           )"
+R"(               |       \(__6_12___#___3____####3)###||#############################/                          )",
+R"(               |        \(__6_7___#___3____####3)()0||####de######################/                           )",
+R"(               |         \7___# (0)3____####3)()0__)||###############aw##########/                            )"
 };
 
 vector<string> enemydef3 = { "               |                                                                                              ",
@@ -655,143 +655,6 @@ R"(               |        /                           ||                       
 }
 
 
-//void GameSystem() {
-//    if (EnemyHp1 > 0) {
-//        if (shield > 0) {
-//            shield = shield - 20;
-//            hp = hp - EndmyDamage1 + 20;
-//        }
-//        else {
-//            shield = 0;
-//            hp = hp - EndmyDamage1;
-//        }
-//    }
-//
-//    if (hp <= 0) {
-//        system("cls");
-//        for (int i = 0; i <= 22; ++i) cout << endl;
-//        GameOver();
-//        for (int i = 0; i <= 10; ++i) cout << endl;
-//        string choice;
-//        while (true) {
-//            cout << "   Choose: quit / back / play again: ";
-//            cin >> choice;
-//
-//            if (choice == "quit") {
-//                exitMessage();
-//                exit(0);  // To ensure program actually exits
-//            }
-//            else if (choice == "back") {
-//                hp = hp2;
-//                mana = mana2;
-//                shield = shield2;
-//                EnemyHp1 = 100;
-//                enemy1 = enemydef;
-//                AbilityCount = 0;
-//                system("cls");
-//                title();
-//                options();
-//                input();
-//                break;
-//            }
-//            else if (choice == "play" || choice == "play again") {
-//                hp = hp2;
-//                mana = mana2;
-//                shield = shield2;
-//                EnemyHp1 = 100;
-//                EnemyHp2 = 150;
-//                EnemyHp3 = 200;
-//                AbilityCount = 0;
-//                enemy1 = enemydef;
-//                system("cls");
-//                Layer1View();
-//                system("cls");
-//                View_of_fight();
-//                View_fight_options();
-//                break;
-//            }
-//            else {
-//                cout << "Invalid choice. Try again." << endl;
-//            }
-//        }
-//        return;
-//    }
-//
-//    if (EnemyHp1 <= 0) {
-//        if (EnemyHp2 > 0) {
-//            system("cls");
-//            EnemyHp1 = EnemyHp2;
-//            EnemyHp2 = 0;
-//            EndmyDamage1 = EndmyDamage2;
-//            enemy1 = enemy2;
-//            Layer2View();
-//            system("cls");
-//            View_of_fight();
-//            View_fight_options();
-//        }
-//        else if (EnemyHp3 > 0) {
-//            system("cls");
-//            EnemyHp1 = EnemyHp3;
-//            EnemyHp3 = 0;
-//            EndmyDamage1 = EndmyDamage3;
-//            enemy1 = enemy3;
-//            Layer3View();
-//            system("cls");
-//            View_of_fight();
-//            View_fight_options();
-//        }
-//        else {
-//            system("cls");
-//            for (int i = 0; i <= 22; ++i) cout << endl;
-//            Victory();
-//            for (int i = 0; i <= 10; ++i) cout << endl;
-//            string choice;
-//            while (true) {
-//                cout << "   Choose: quit / back / play again: ";
-//                cin >> choice;
-//
-//                if (choice == "quit") {
-//                    exitMessage();
-//                    exit(0);  // To ensure program actually exits
-//                }
-//                else if (choice == "back") {
-//                    hp = hp2;
-//                    mana = mana2;
-//                    shield = shield2;
-//                    EnemyHp1 = 100;
-//                    EnemyHp2 = 150;
-//                    EnemyHp3 = 200;
-//                    enemy1 = enemydef;
-//                    AbilityCount = 0;
-//                    system("cls");
-//                    title();
-//                    options();
-//                    input();
-//                    break;
-//                }
-//                else if (choice == "play" || choice == "play again") {
-//                    hp = hp2;
-//                    mana = mana2;
-//                    shield = shield2;
-//                    EnemyHp1 = 100;
-//                    EnemyHp2 = 150;
-//                    EnemyHp3 = 200;
-//                    AbilityCount = 0;
-//                    enemy1 = enemydef;
-//                    system("cls");
-//                    Layer1View();
-//                    system("cls");
-//                    View_of_fight();
-//                    View_fight_options();
-//                    break;
-//                }
-//                else {
-//                    cout << "Invalid choice. Try again." << endl;
-//                }
-//            }
-//        }
-//    }
-//}
 
 
 void GameSystem() {

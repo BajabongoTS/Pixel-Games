@@ -62,7 +62,7 @@ std::vector<std::string> wepdef = { "                                           
 "                                                                                         |.",
 "                                                                                         |.",
 "                                                                                         |."};
-string enemy1 = R"(               |                                                                                       .-.                                                                                              |.
+string enemy1 = R"(               |                                                                                     .-.                                                                                               |.
                |                                                                                    (o.o)                                                                                              |.
                |                                                                                    _|=|_                                                                                              |.
                |                                                                                  //.=|=.\\                                                                                            |.
@@ -75,7 +75,7 @@ string enemy1 = R"(               |                                             
                |                                                                                   ==' '==                                                                                             |.)";
 
 
-string enemydef = R"(               |                                                                                     .-.                                                                                               |.
+string enemydef = R"(               |                                                                                   .-.                                                                                               |.
                |                                                                                    (o.o)                                                                                              |.
                |                                                                                    _|=|_                                                                                              |.
                |                                                                                  //.=|=.\\                                                                                            |.
@@ -99,7 +99,7 @@ string enemy2 = R"(               |                                             
                |                                                                                      |||                                                                                              |.
                |                                                                                     /_|_\                                                                                             |.)";
 
-string enemy3 = R"(               |                                                                                                 v                                                                                     |.
+string enemy3 = R"(               |                                                                                          v                                                                                            |.
                |                                                                                    (__)v | v                                                                                          |.
                |                                                                                    /\/\\_|_/                                                                                          |.
                |                                                                                   _\__/  |                                                                                            |.
@@ -348,12 +348,12 @@ void Options_of_Wepons_or_PasiweItem() {
     cout << endl;
 
 
-    cout << R"(                                          _____               _____       _____                   _____       _____                    _____       _____                   _____
-                                         ( ___ )-------------( ___ )     ( ___ )-----------------( ___ )     ( ___ )------------------( ___ )     ( ___ )-----------------( ___ )
-                                          |   |               |   |       |   |                   |   |       |   |                    |   |       |   |                   |   |
-                                          |   |    Wepons     |   |       |   |    PasiweItems    |   |       |   |    ChangePasiwe    |   |       |   |     ChangeWepon   |   |
-                                          |___|               |___|       |___|                   |___|       |___|                    |___|       |___|                   |___|
-                                         (_____)-------------(_____)     (_____)-----------------(_____)     (_____)------------------(_____)     (_____)-----------------(_____)                                                                                                  )" << endl;
+    cout << R"(                                          _____               _____       _____                   _____       _____                    _____       _____                    _____
+                                         ( ___ )-------------( ___ )     ( ___ )-----------------( ___ )     ( ___ )------------------( ___ )     ( ___ )------------------( ___ )
+                                          |   |               |   |       |   |                   |   |       |   |                    |   |       |   |                    |   |
+                                          |   |    Weapons    |   |       |   |      Shields      |   |       |   |    ChangeShield    |   |       |   |    ChangeWeapon    |   |
+                                          |___|               |___|       |___|                   |___|       |___|                    |___|       |___|                    |___|
+                                         (_____)-------------(_____)     (_____)-----------------(_____)     (_____)------------------(_____)     (_____)------------------(_____)                                                                                                  )" << endl;
 }
 
 
@@ -366,13 +366,12 @@ namespace AsciiWeapons {
     |       [########[]_________________________________>       |
     |                \>                                         |
     |                                                           |
-    |  Obrażenia:                                               |
+    |  Damage:                                                  |
     |  30                                                       |
     |                                                           |
-    |  Umiejętność:                                             |
-    |  cena 30 punktów many                                     |
-    |  Zadaje dodatkowe 10 obrażeń i blokuje na 1 rundę         |
-    |  umiejętność wroga.                                       |
+    |  Skill:                                                   |
+    |  Cost 30 mana                                             |
+    |  Deals 30 extra damage                                    |
     |                                                           |
     +-----------------------------------------------------------+      
              
@@ -381,13 +380,13 @@ namespace AsciiWeapons {
     |                                                           |  
     |        ,  /\  .                                           |
     |       //`-||-'\\                                          |
-    |      (| -=||=- |)         Obrażenia:                      |
+    |      (| -=||=- |)         Damage:                         |
     |       \\,-||-.//          20                              |
     |        `  ||  '                                           |
-    |           ||              Umiejętność:                    |
-    |           ||              cena 50 punktów many            |
-    |           ||              Zadaje krytyczny cos który      |
-    |           ||              zada 80 obrażeń                 |
+    |           ||              Skill:                          |
+    |           ||              Cost 50 mana                    |
+    |           ||              Deals a critical hit that       |
+    |           ||              deals 80 damage                 |
     |           ||                                              |
     |           ()                                              |
     |                                                           |
@@ -403,14 +402,14 @@ namespace AsciiWeapons {
     |               \/                                          |
     |                                                           |
     |                                                           |
-    |  Obrażenia:                                               |
+    |  Damage:                                                  |
     |  20                                                       |
     |                                                           |
-    |  Umiejętność:                                             |
-    |  cena 60 punktów many                                     |
-    |  Nakłada krwawienie na przeciwnika przez co gracz         |
-    |  otrzymuje dodatkowe 10 hp i zadaje przeciwnikowi         |
-    |  40 obrażeń                                               |
+    |  Skill:                                                   |
+    |  Cost 60 mana                                             |
+    |  Inflicts bleeding on the opponent, causing the player    |
+    |  to gain an additional 10 hp and deal 80 damage to        |
+    |  the opponent                                             |
     |                                                           |
     +-----------------------------------------------------------+   
     )"
@@ -428,12 +427,12 @@ namespace AsciiWeapons {
     |                                                           |  
     |            _..._                                          |
     |        .-'_.---._'-.                                      |
-    |        ||####|(__)||        Ochrona:                      |
+    |        ||####|(__)||        Protect:                      |
     |        ((####|(**)))        50                            |
     |         '\###|_''/'                                       |
-    |          \\()|##//          Pasywna Umiejętność:          |
-    |           \\ |#//           Dodaje 30 do maksymalnego     |
-    |            .\_/.            zdrowia.                      |
+    |          \\()|##//          Passive Ability:              |
+    |           \\ |#//           Adds 30 to your maximum       |
+    |            .\_/.            health.                       |
     |             L.J                                           |
     |              "                                            |
     |                                                           |
@@ -443,12 +442,12 @@ namespace AsciiWeapons {
     +-----------------------------------------------------------+
     |                                                           |  
     |       |`-._/\_.-`|                                        |
-    |       |    ||    |           Ochrona:                     |
+    |       |    ||    |           Protect:                     |
     |       |___o()o___|           65                           |
     |       |__((<>))__|                                        |
-    |       \   o\/o   /           Pasywna Umiejętność:         |
-    |        \   ||   /            Dodaje do zdrowia 15 i do    |
-    |         \  ||  /             many 15                      |
+    |       \   o\/o   /           Passive Ability:             |
+    |        \   ||   /            Adds 15 health and           |
+    |         \  ||  /             15 mana to                   |
     |          '.||.'                                           |
     |            ``                                             |
     |                                                           |
@@ -459,12 +458,12 @@ namespace AsciiWeapons {
     |                                                           |  
     |         |\ _..--.._ /|                                    |
     |         |############|                                    |
-    |          )##########(        Ochrona:                     |
+    |          )##########(        Protect:                     |
     |       ._/##.'//\\'.##\_.     50                           |
     |        .__)#((()))#(__.                                   |
-    |         \##'.\\//.'##/       Pasywna Umiejętność:         |
-    |          \####\/####/        Dodaje 30 do maksymalnej     |
-    |          /,.######.,\        ilości many                  |
+    |         \##'.\\//.'##/       Passive Ability:             |
+    |          \####\/####/        Adds 30 to max               |
+    |          /,.######.,\        amount of mana               |
     |         (  \##__##/  )                                    |
     |             "(\/)'                                        |
     |               )(|                                         |
@@ -599,7 +598,7 @@ void Layer3View() {
 void View_of_fight() {
                    
     cout << R"(             _________________________________________________________________________________________________________________________________________________________________________________________)" << endl;
-    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage1 << "                                                   |   Your Stats     PlayerDamege: " << PlayerDamage << "     SpecialAttack: " << AbilityCount << "     ManaPotion: " << ManaPotion << "     HpPotion: " << HpPotion << R"(   \.)" << endl;
+    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage1 << "                                                   |   Your Stats     PlayerDamege: " << PlayerDamage << "     SpecialAttack: " << AbilityCount << "     ManaPotion: " << ManaPotion << "     HpPotion: " << HpPotion << R"( \.)" << endl;
     cout << R"(           |   |                                        Hp:                                            |               Shield                         Hp:                        Mana:                 |.
             \__|                           +--------------------------+                                |         +---------------------+     +---------------------+     +---------------------+       |.)" << endl;
     cout << "               |                           |###########" << EnemyHp1 << "############|                                |         |##########" << shield << "#########|     |#########" << hp << "#########|     |#########" << mana << "#########|       |." << endl;
@@ -621,12 +620,12 @@ void View_of_fight() {
 }
 
 void View_fight_options() {
-    cout << R"(                               _____                      _____       _____                    _____       _____                 _____       _____               _____
-                              ( ___ )--------------------( ___ )     ( ___ )------------------( ___ )     ( ___ )---------------( ___ )     ( ___ )---------------( ___ )     ( ___ )-------------( ___ )  
-                               |   |                      |   |       |   |                    |   |       |   |                 |   |       |   |                 |   |       |   |               |   |
-                               |   |    Normal Attack     |   |       |   |    Super Attack    |   |       |   |    End Round    |   |       |   |   Mana Potion   |   |       |   |   Hp Potion   |   |
-                               |___|                      |___|       |___|                    |___|       |___|                 |___|       |___|                 |___|       |___|               |___|
-                              (_____)--------------------(_____)     (_____)------------------(_____)     (_____)---------------(_____)     (_____)---------------(_____)     (_____)-------------(_____)    
+    cout << R"(                               _____                      _____       _____                      _____       _____                 _____       _____                 _____       _____               _____
+                              ( ___ )--------------------( ___ )     ( ___ )--------------------( ___ )     ( ___ )---------------( ___ )     ( ___ )---------------( ___ )     ( ___ )-------------( ___ )  
+                               |   |                      |   |       |   |                      |   |       |   |                 |   |       |   |                 |   |       |   |               |   |
+                               |   |    Normal Attack     |   |       |   |    Special Attack    |   |       |   |    End Round    |   |       |   |   Mana Potion   |   |       |   |   Hp Potion   |   |
+                               |___|                      |___|       |___|                      |___|       |___|                 |___|       |___|                 |___|       |___|               |___|
+                              (_____)--------------------(_____)     (_____)--------------------(_____)     (_____)---------------(_____)     (_____)---------------(_____)     (_____)-------------(_____)    
     )";
 }
 
@@ -638,7 +637,7 @@ void Victory() {
                                                             \ \    / /   \ \  \ \  \____   \ \  \ \ \  \\\  \ \  \\  \|   \/  /  /  
                                                              \ \__/ /     \ \__\ \_______\  \ \__\ \ \_______\ \__\\ _\ __/  / /    
                                                               \|__|/       \|__|\|_______|   \|__|  \|_______|\|__|\|__|\___/ /     
-                                                                                                                                              \|___|/      )";
+                                                                                                                       \|___|/      )";
 }
 
 void GameOver() {
