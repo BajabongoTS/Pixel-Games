@@ -33,6 +33,11 @@ typedef int Damage;
 extern Shield shield;
 extern Hp hp;
 extern Mana mana;
+
+extern Shield shield2;
+extern Hp hp2;
+extern Mana mana2;
+
 extern Damage PlayerDamage;
 
 
@@ -45,6 +50,8 @@ extern Hp EnemyHp2;
 extern Damage EndmyDamage3;
 extern Hp EnemyHp3;
 
+extern Hp HpPotion;
+extern Mana ManaPotion;
 
 extern Damage PlayerSpecialDamage;
 extern Mana ManaCost;

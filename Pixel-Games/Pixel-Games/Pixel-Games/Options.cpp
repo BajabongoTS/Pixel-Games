@@ -37,6 +37,7 @@ void startGame(string& n) {
 }
 
 
+
 vector<Enemy> enemies = {
     {
 R"(                                                                                 _____ __ ________  ____   _____  ____  _____  _____ 
@@ -57,7 +58,7 @@ R"(                                                                             
                                                                                 |                        || ||                      |
                                                                                 |                       ==' '==                     |
                                                                                 |                                                   |
-                                                                                |                  Enemy damage: 10                 |
+                                                                                |                  Enemy damage: 20                 |
                                                                                 |                   Enemy hp: 100                   |)",
         "easy"
     },
@@ -83,7 +84,7 @@ R"(                                                                             
                                                                                 |                        |||                        |
                                                                                 |                       /_|_\                       |
                                                                                 |                                                   |
-                                                                                |                  Enemy damage: 10                 |
+                                                                                |                  Enemy damage: 30                 |
                                                                                 |                   Enemy hp: 150                   |)",
         "medium"
     },
@@ -112,7 +113,7 @@ R"(                                                                             
                                                                                 |                    /  )^/\^( |                    |
                                                                                 |                    )_//`__>>                      |
                                                                                 |                                                   |
-                                                                                |                  Enemy damage: 20                 |
+                                                                                |                  Enemy damage: 40                 |
                                                                                 |                   Enemy hp: 200                   |)",
         "hard"
     }
@@ -221,10 +222,9 @@ void choseOptionPlay(string& n) {
                system("cls");
                View_of_fight();
                View_fight_options();
-               while (n != "EndRound") {
-                   cout << "EndRound:  ";
-                   cin >> n;
-                   if (n == "EndRound") {
+               cout << "\nPress Enter to EndRound:";
+               cin.ignore();
+               cin.get();
                        AbilityCount = AbilityCount - 1;
 
                        if (AbilityCount < 0) {
@@ -235,8 +235,32 @@ void choseOptionPlay(string& n) {
                        system("cls");
                        View_of_fight();
                        View_fight_options();
-                   }
-               }
+        }
+        else if (n == "HpPotion") {
+            if (HpPotion > 0) {
+                HpPotion = HpPotion - 20;
+                hp = hp + 20;
+            }
+            else {
+                HpPotion = 0;
+            }
+            
+            system("cls");
+            View_of_fight();
+            View_fight_options();
+        }
+        else if (n == "ManaPotion") {
+            if (ManaPotion > 0) {
+               ManaPotion = ManaPotion - 20;
+                mana = mana + 20; 
+            }
+            else {
+                ManaPotion = 0;
+            }
+
+            system("cls");
+            View_of_fight();
+            View_fight_options();
         }
         else if (n == "SpecialAttack") {
             if (AbilityCount == 0) {
@@ -247,17 +271,19 @@ void choseOptionPlay(string& n) {
                     system("cls");
                     View_of_fight();
                     View_fight_options();
-                    while (n != "EndRound") {
-                        cout << "EndRound:  ";
-                        cin >> n;
-                        if (n == "EndRound") {
-                            AbilityCount = AbilityCount - 1;
-                            GameSystem();
-                            system("cls");
-                            View_of_fight();
-                            View_fight_options();
-                        }
+                    cout << "\nPress Enter to EndRound:";
+                    cin.ignore();
+                    cin.get();
+                    AbilityCount = AbilityCount - 1;
+
+                    if (AbilityCount < 0) {
+                        AbilityCount = 0;
                     }
+
+                    GameSystem();
+                    system("cls");
+                    View_of_fight();
+                    View_fight_options();
                 }
                 else {
                     cout << "Not enough mana for Special Attack!" << endl;
@@ -270,15 +296,22 @@ void choseOptionPlay(string& n) {
         }
         else if (n == "EndRound") {
             AbilityCount = AbilityCount - 1;
+
+            if (AbilityCount < 0) {
+                AbilityCount = 0;
+            }
+
             GameSystem();
             system("cls");
             View_of_fight();
             View_fight_options();
         }
         else if (n == "back") {
-            hp = 100;
-            mana = 100;
-            EnemyHp1 = 200;
+            hp = hp2;
+            mana = mana2;
+            shield = shield2;
+            EnemyHp1 = 100;
+            enemy1 = enemydef;
             AbilityCount = 0;
             system("cls");
             title();
@@ -587,12 +620,10 @@ R"(               |        /                           ||                       
 
     if (id == 1) {
         pasiws = item1;
-        hp = 100;
+        hp = 130;
         mana = 100;
-        hp = hp + 30;
         enemydefshield = enemydef1;
         shield = 50;
-
 
         hp2 = hp;
         mana2 = mana;
@@ -601,10 +632,8 @@ R"(               |        /                           ||                       
     }
     else if (id == 2) {
         pasiws = item2;
-        hp = 100;
-        mana = 100;
-        hp = hp + 15;
-        mana = mana + 15;
+        hp = 115;
+        mana = 115;
         enemydefshield = enemydef2;
         shield = 65;
 
@@ -615,27 +644,167 @@ R"(               |        /                           ||                       
     else if (id == 3) {
         pasiws = item3;
         hp = 100;
-        mana = 100;
-        mana = mana + 30;
+        mana = 130;
         enemydefshield = enemydef3;
         shield = 50;
 
         hp2 = hp;
         mana2 = mana;
         shield2 = shield;
-
     }
 }
 
+
+//void GameSystem() {
+//    if (EnemyHp1 > 0) {
+//        if (shield > 0) {
+//            shield = shield - 20;
+//            hp = hp - EndmyDamage1 + 20;
+//        }
+//        else {
+//            shield = 0;
+//            hp = hp - EndmyDamage1;
+//        }
+//    }
+//
+//    if (hp <= 0) {
+//        system("cls");
+//        for (int i = 0; i <= 22; ++i) cout << endl;
+//        GameOver();
+//        for (int i = 0; i <= 10; ++i) cout << endl;
+//        string choice;
+//        while (true) {
+//            cout << "   Choose: quit / back / play again: ";
+//            cin >> choice;
+//
+//            if (choice == "quit") {
+//                exitMessage();
+//                exit(0);  // To ensure program actually exits
+//            }
+//            else if (choice == "back") {
+//                hp = hp2;
+//                mana = mana2;
+//                shield = shield2;
+//                EnemyHp1 = 100;
+//                enemy1 = enemydef;
+//                AbilityCount = 0;
+//                system("cls");
+//                title();
+//                options();
+//                input();
+//                break;
+//            }
+//            else if (choice == "play" || choice == "play again") {
+//                hp = hp2;
+//                mana = mana2;
+//                shield = shield2;
+//                EnemyHp1 = 100;
+//                EnemyHp2 = 150;
+//                EnemyHp3 = 200;
+//                AbilityCount = 0;
+//                enemy1 = enemydef;
+//                system("cls");
+//                Layer1View();
+//                system("cls");
+//                View_of_fight();
+//                View_fight_options();
+//                break;
+//            }
+//            else {
+//                cout << "Invalid choice. Try again." << endl;
+//            }
+//        }
+//        return;
+//    }
+//
+//    if (EnemyHp1 <= 0) {
+//        if (EnemyHp2 > 0) {
+//            system("cls");
+//            EnemyHp1 = EnemyHp2;
+//            EnemyHp2 = 0;
+//            EndmyDamage1 = EndmyDamage2;
+//            enemy1 = enemy2;
+//            Layer2View();
+//            system("cls");
+//            View_of_fight();
+//            View_fight_options();
+//        }
+//        else if (EnemyHp3 > 0) {
+//            system("cls");
+//            EnemyHp1 = EnemyHp3;
+//            EnemyHp3 = 0;
+//            EndmyDamage1 = EndmyDamage3;
+//            enemy1 = enemy3;
+//            Layer3View();
+//            system("cls");
+//            View_of_fight();
+//            View_fight_options();
+//        }
+//        else {
+//            system("cls");
+//            for (int i = 0; i <= 22; ++i) cout << endl;
+//            Victory();
+//            for (int i = 0; i <= 10; ++i) cout << endl;
+//            string choice;
+//            while (true) {
+//                cout << "   Choose: quit / back / play again: ";
+//                cin >> choice;
+//
+//                if (choice == "quit") {
+//                    exitMessage();
+//                    exit(0);  // To ensure program actually exits
+//                }
+//                else if (choice == "back") {
+//                    hp = hp2;
+//                    mana = mana2;
+//                    shield = shield2;
+//                    EnemyHp1 = 100;
+//                    EnemyHp2 = 150;
+//                    EnemyHp3 = 200;
+//                    enemy1 = enemydef;
+//                    AbilityCount = 0;
+//                    system("cls");
+//                    title();
+//                    options();
+//                    input();
+//                    break;
+//                }
+//                else if (choice == "play" || choice == "play again") {
+//                    hp = hp2;
+//                    mana = mana2;
+//                    shield = shield2;
+//                    EnemyHp1 = 100;
+//                    EnemyHp2 = 150;
+//                    EnemyHp3 = 200;
+//                    AbilityCount = 0;
+//                    enemy1 = enemydef;
+//                    system("cls");
+//                    Layer1View();
+//                    system("cls");
+//                    View_of_fight();
+//                    View_fight_options();
+//                    break;
+//                }
+//                else {
+//                    cout << "Invalid choice. Try again." << endl;
+//                }
+//            }
+//        }
+//    }
+//}
+
+
 void GameSystem() {
+    if (EnemyHp1 > 0) {
         if (shield > 0) {
-           shield = shield - 10;
-           hp = hp - EndmyDamage1 + 10;
+            shield = shield - 20;
+            hp = hp - EndmyDamage1 + 20;
         }
         else {
-           hp = hp - EndmyDamage1;
+            shield = 0;
+            hp = hp - EndmyDamage1;
         }
-
+    }
 
     if (hp <= 0) {
         system("cls");
@@ -644,80 +813,33 @@ void GameSystem() {
         for (int i = 0; i <= 10; ++i) cout << endl;
         string choice;
         while (true) {
-            cout << "   Choose: quit / back: ";
-            cin >> choice;
-            if (choice == "quit") {
-                exitMessage();
-                break;
-            }
-            else if (choice == "back") {
-                //hp = hp2;
-                //mana = mana2;
-                //shield = shield2;
-                //enemy1 = enemydef;
-                AbilityCount = 0;
-                system("cls");
-                title();
-                options();
-                input();
-                break;
-            }
-            else {
-                cout << "Invalid choice. Try again." << endl;
-            }
-        }
-    }
-    if (EnemyHp1 <= 0) {
-        system("cls");
-        hp = hp2;
-        mana = mana2;
-        shield = shield2;
-        EnemyHp1 = EnemyHp2;
-        EndmyDamage1 = EndmyDamage2;
-        enemy1 = enemy2;
-        Layer2View();
-        system("cls");
-        View_of_fight();
-        View_fight_options();
-    }
-    if (EnemyHp2 <= 0) {
-        system("cls");
-        hp = hp2;
-        mana = mana2;
-        shield = shield2;
-        EnemyHp1 = EnemyHp3;
-        EndmyDamage1 = EndmyDamage3;
-        enemy1 = enemy3;
-        Layer3View();
-        system("cls");
-        View_of_fight();
-        View_fight_options();
-    }
-
-    // do naprawy
-
-    if (EnemyHp3 <= 0) {
-        system("cls");
-        for (int i = 0; i <= 22; ++i) cout << endl;
-        Victory();
-        for (int i = 0; i <= 10; ++i) cout << endl;
-        string choice;
-        while (true) {
             cout << "   Choose: quit / back / play again: ";
             cin >> choice;
+
             if (choice == "quit") {
                 exitMessage();
-                break;
+                exit(0);  // To ensure program actually exits
             }
             else if (choice == "back") {
+                hp = hp2;
+                mana = mana2;
+                shield = shield2;
+                EnemyHp1 = 100;
                 enemy1 = enemydef;
                 AbilityCount = 0;
                 system("cls");
                 title();
                 options();
                 input();
+                break;
             }
-            else if (choice == "play again") {
+            else if (choice == "play" || choice == "play again") {
+                hp = hp2;
+                mana = mana2;
+                shield = shield2;
+                EnemyHp1 = 100;
+                EnemyHp2 = 150;
+                EnemyHp3 = 200;
                 AbilityCount = 0;
                 enemy1 = enemydef;
                 system("cls");
@@ -725,9 +847,94 @@ void GameSystem() {
                 system("cls");
                 View_of_fight();
                 View_fight_options();
+
+                // Get a new input string to start the game again
+                string n = "Play";
+                choseOptionPlay(n);
+                return;  // Return directly to avoid going back to title screen
             }
             else {
                 cout << "Invalid choice. Try again." << endl;
+            }
+        }
+        return;
+    }
+
+    if (EnemyHp1 <= 0) {
+        if (EnemyHp2 > 0) {
+            system("cls");
+            EnemyHp1 = EnemyHp2;
+            EnemyHp2 = 0;
+            EndmyDamage1 = EndmyDamage2;
+            enemy1 = enemy2;
+            Layer2View();
+            system("cls");
+            View_of_fight();
+            View_fight_options();
+        }
+        else if (EnemyHp3 > 0) {
+            system("cls");
+            EnemyHp1 = EnemyHp3;
+            EnemyHp3 = 0;
+            EndmyDamage1 = EndmyDamage3;
+            enemy1 = enemy3;
+            Layer3View();
+            system("cls");
+            View_of_fight();
+            View_fight_options();
+        }
+        else {
+            system("cls");
+            for (int i = 0; i <= 22; ++i) cout << endl;
+            Victory();
+            for (int i = 0; i <= 10; ++i) cout << endl;
+            string choice;
+            while (true) {
+                cout << "   Choose: quit / back / play again: ";
+                cin >> choice;
+
+                if (choice == "quit") {
+                    exitMessage();
+                    exit(0);  // To ensure program actually exits
+                }
+                else if (choice == "back") {
+                    hp = hp2;
+                    mana = mana2;
+                    shield = shield2;
+                    EnemyHp1 = 100;
+                    EnemyHp2 = 150;
+                    EnemyHp3 = 200;
+                    enemy1 = enemydef;
+                    AbilityCount = 0;
+                    system("cls");
+                    title();
+                    options();
+                    input();
+                    break;
+                }
+                else if (choice == "play" || choice == "play again") {
+                    hp = hp2;
+                    mana = mana2;
+                    shield = shield2;
+                    EnemyHp1 = 100;
+                    EnemyHp2 = 150;
+                    EnemyHp3 = 200;
+                    AbilityCount = 0;
+                    enemy1 = enemydef;
+                    system("cls");
+                    Layer1View();
+                    system("cls");
+                    View_of_fight();
+                    View_fight_options();
+
+                    // Get a new input string to start the game again
+                    string n = "Play";
+                    choseOptionPlay(n);
+                    return;  // Return directly to avoid going back to title screen
+                }
+                else {
+                    cout << "Invalid choice. Try again." << endl;
+                }
             }
         }
     }

@@ -62,7 +62,7 @@ std::vector<std::string> wepdef = { "                                           
 "                                                                                         |.",
 "                                                                                         |.",
 "                                                                                         |."};
-string enemy1 = R"(               |                                                                                      .-.                                                                                             |.
+string enemy1 = R"(               |                                                                                       .-.                                                                                              |.
                |                                                                                    (o.o)                                                                                              |.
                |                                                                                    _|=|_                                                                                              |.
                |                                                                                  //.=|=.\\                                                                                            |.
@@ -75,7 +75,7 @@ string enemy1 = R"(               |                                             
                |                                                                                   ==' '==                                                                                             |.)";
 
 
-string enemydef = R"(               |                                                                                      .-.                                                                                             |.
+string enemydef = R"(               |                                                                                     .-.                                                                                               |.
                |                                                                                    (o.o)                                                                                              |.
                |                                                                                    _|=|_                                                                                              |.
                |                                                                                  //.=|=.\\                                                                                            |.
@@ -123,16 +123,19 @@ Damage PlayerSpecialDamage = 15;
 
 Mana ManaCost = 20;
 
-Damage PlayerDamage = 10;
+Damage PlayerDamage = 1000;
 
-Damage EndmyDamage1 = 10;
+Damage EndmyDamage1 = 20;
 Hp EnemyHp1 = 100;
 
-Damage EndmyDamage2 = 10;
+Damage EndmyDamage2 = 30;
 Hp EnemyHp2 = 150;
 
-Damage EndmyDamage3 = 20;
+Damage EndmyDamage3 = 40;
 Hp EnemyHp3 = 200;
+
+Hp HpPotion = 60;
+Mana ManaPotion = 40;
 
 
 void studio(atomic<bool>& running) {
@@ -596,7 +599,7 @@ void Layer3View() {
 void View_of_fight() {
                    
     cout << R"(             _________________________________________________________________________________________________________________________________________________________________________________________)" << endl;
-    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage1 << "                                                   |   Your Stats       PlayerDamege: " << PlayerDamage << "       SpecialAttack: " << AbilityCount << R"(                                   \.)" << endl;
+    cout << R"(            /  \   Enemy Stats       EnemyDamage: )" << EndmyDamage1 << "                                                   |   Your Stats     PlayerDamege: " << PlayerDamage << "     SpecialAttack: " << AbilityCount << "     ManaPotion: " << ManaPotion << "     HpPotion: " << HpPotion << R"(   \.)" << endl;
     cout << R"(           |   |                                        Hp:                                            |               Shield                         Hp:                        Mana:                 |.
             \__|                           +--------------------------+                                |         +---------------------+     +---------------------+     +---------------------+       |.)" << endl;
     cout << "               |                           |###########" << EnemyHp1 << "############|                                |         |##########" << shield << "#########|     |#########" << hp << "#########|     |#########" << mana << "#########|       |." << endl;
@@ -618,12 +621,12 @@ void View_of_fight() {
 }
 
 void View_fight_options() {
-    cout << R"(                                   _____                      _____       _____                    _____       _____                       _____       _____                 _____
-                                  ( ___ )--------------------( ___ )     ( ___ )------------------( ___ )     ( ___ )---------------------( ___ )     ( ___ )---------------( ___ )  
-                                   |   |                      |   |       |   |                    |   |       |   |                       |   |       |   |                 |   |
-                                   |   |    Normal Attack     |   |       |   |    Super Attack    |   |       |   |    Use Pasiwe Item    |   |       |   |    End Round    |   |
-                                   |___|                      |___|       |___|                    |___|       |___|                       |___|       |___|                 |___|
-                                  (_____)--------------------(_____)     (_____)------------------(_____)     (_____)---------------------(_____)     (_____)---------------(_____)    
+    cout << R"(                               _____                      _____       _____                    _____       _____                 _____       _____               _____
+                              ( ___ )--------------------( ___ )     ( ___ )------------------( ___ )     ( ___ )---------------( ___ )     ( ___ )---------------( ___ )     ( ___ )-------------( ___ )  
+                               |   |                      |   |       |   |                    |   |       |   |                 |   |       |   |                 |   |       |   |               |   |
+                               |   |    Normal Attack     |   |       |   |    Super Attack    |   |       |   |    End Round    |   |       |   |   Mana Potion   |   |       |   |   Hp Potion   |   |
+                               |___|                      |___|       |___|                    |___|       |___|                 |___|       |___|                 |___|       |___|               |___|
+                              (_____)--------------------(_____)     (_____)------------------(_____)     (_____)---------------(_____)     (_____)---------------(_____)     (_____)-------------(_____)    
     )";
 }
 
